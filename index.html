@@ -5,18 +5,19 @@
   <title>Test</title>
 
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    var OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: "19ffd7fc-41b1-4fde-b33a-e72777d6e41d",
-        notifyButton: {
-          enable: true,
-        },
-      });
-      OneSignal.showNativePrompt();
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "19ffd7fc-41b1-4fde-b33a-e72777d6e41d",
     });
-  </script>
+  });
+  let myCustomUniqueUserId = "667";
+
+OneSignal.push(function() {
+  OneSignal.setExternalUserId(myCustomUniqueUserId);
+});
+   
   </head>
   
 <body>
