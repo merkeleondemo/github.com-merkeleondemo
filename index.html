@@ -19,11 +19,29 @@ OneSignal.push(function()
 { OneSignal.setExternalUserId(myCustomUniqueUserId); }
 );
 </script>
-   
+    <script src="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x"></script>
   </head>
-  
+  <script>
+    ScanditSDK.configure("AZZPAjO3LFl3Dzf1QSBag1lDibIoOPh4b0Twt00USGXQX+wzL00WNFUmHjWefw4CwkZ+SeZWgFeRYIuAxT3b29dl9Lu5Q7QB+VaO76BxCzdISYlsw39AXy5wx6RAYLDBESbheyw1fHEGI8aAKx+C8F0tTZvOUkVfOw6KcVM8AkGDv2Rm9fs3g/kEd9QtuHRPZ3XAasrcn3ZXrAmq4t/vOn7bmi1lvlDr5aH7EP6kFxo5KyBGqIDWz8I80O5QlMMesS8dNGZPm6G8JSIDmJEkV1X1A6l9FRObSat1kJo08x6rozB0UhkkN0k39jy6esg/gy3qrxJB+zTN295/aShHcMacum5JU72NhyrDhHJR3R2sYCU/Z0o1gh3fZxZwHj0XSTbTvLi7mjLqDJz8M2R9pWaZvtNlrmrPrznQzbW1Sa+TFepK5SuV7WTVeTR5rEcNE96cEnjZ8i+ZsSXgnKO+KC3NX+w6xogU4qjKmOPF/+AaIcTYVX8KhvsczP+GVnq3U1SECSKZw38JrwYcHAPVQ8N47Z7sRai2eYQ1PV8DefoHh3Unzd0NJaDeGWvTvdXyrdMzWu6U/ilGk788oucgq3aOz+XeQNdBT9r6ZVlEBU+zoazeOhAL5UKpE0JapbwO6z97cod9mMfZHbbvCk3vo6Nk47GcTJuHqCdP1bP5LXTbYtOeIY5mu8gc22VDcCUbv6WXoi9+oGrGt8NWevVTBLXmmSPcv3v22zLAVqIXCVA/cHjd/g7FEV7y+UscwBVICqHxuQ7ZqSmo2w8xZiN20fm8DrDUHaywa4HWjw1+ymwdZy0Op9c4eTFOPSS26Q==", {
+  engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/",
+})
+  .then(() => {
+    return ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
+      // enable some common symbologies
+      scanSettings: new ScanditSDK.ScanSettings({ enabledSymbologies: ["ean8", "ean13", "upca", "upce"] }),
+    });
+  })
+  .then((barcodePicker) => {
+    // barcodePicker is ready here, show a message every time a barcode is scanned
+    barcodePicker.on("scan", (scanResult) => {
+      alert(scanResult.barcodes[0].data);
+    });
+  });
+  </script>
 <body>
 <h1>Hello World</h1>
+  
+  <div id="scandit-barcode-picker"></div>
 <p>I'm hosted with GitHub Pages.</p>
 </body>
 </html>
